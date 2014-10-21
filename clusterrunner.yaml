@@ -1,0 +1,31 @@
+Simple:
+    max_executors: 10
+
+    setup_build:
+        - echo "Performing setup"
+
+    teardown_build:
+        - echo "Performing teardown"
+
+    commands:
+        - sleep 1
+        - echo $TOKEN
+
+    atomizers:
+        - TOKEN: seq 1 10
+
+
+PHPUnit:
+    commands:
+        - phpunit --log-junit $ARTIFACT_DIR/result.xml $TESTPATH
+
+    atomizers:
+        - TESTPATH: find "test/php" -name "*Test.php"
+
+
+Nose:
+    commands:
+        - nosetests --with-xunit --xunit-file $ARTIFACT_DIR/result.xml $TESTPATH
+
+    atomizers:
+        - TESTPATH: find "test/python" -name "test_*.py"
