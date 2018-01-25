@@ -14,6 +14,23 @@ Simple:
     atomizers:
         - TOKEN: seq 1 10
 
+Simple22:
+    max_executors: 10
+
+    setup_build:
+        - echo "Performing setup"
+
+    teardown_build:
+        - echo "Performing teardown"
+
+    commands:
+        - sleep 22
+        - echo $TOKEN
+
+    atomizers:
+        - TOKEN: seq 1 10
+
+
 
 PHPUnit:
     commands:
